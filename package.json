@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "description": "Converts JSON to Sass",
   "private": false,
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "jest",
     "build": "tsc",
