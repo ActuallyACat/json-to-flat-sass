@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import * as glob from 'glob';
 import * as yargs from 'yargs';
-import { jsonToFlatSass } from './utils';
+import { jsonToFlatSass } from './utils.js';
 import * as path from 'path';
 
 const version = require('../package.json').version;
@@ -19,7 +19,7 @@ const argv = yargs
 const source = argv._[0];
 const destination = argv._[1];
 const { extension, separator } = argv;
-if (argv._.length === 0) { 
+if (argv._.length === 0) {
   console.log('Error - Source path missing\n');
   yargs.showHelp();
   process.exit();
@@ -27,7 +27,6 @@ if (argv._.length === 0) {
 
 const sourceDirectory = path.resolve(process.cwd(), source);
 const sourceDirectoryList = glob.sync(sourceDirectory);
-
 const destinationDirectory = path.resolve(process.cwd(), destination);
 
 sourceDirectoryList.forEach((currentPath) => {

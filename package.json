@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "tsc && chmod +x dist/index.js",
+    "build": "tsc --module commonjs && chmod +x dist/index.js",
     "clean": "rimraf dist"
   },
   "author": "",
