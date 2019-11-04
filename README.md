@@ -34,5 +34,5 @@ yarn add @actuallyacat/json-to-flat-sass
 
 ### Usage
 ```
-json-to-flat-sass <input> <output> <optional-separator>
+json-to-flat-sass <input> <output> [<optional-separator>]
 ```

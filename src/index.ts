@@ -1,34 +1,17 @@
-const fsPromises = require('fs').promises; // using experimental API -> https://github.com/nodejs/node/issues/21014
-import { flattenInputToString } from './utils';
-
-export const processInput = async ({
-  source,
-  destination,
-  separator = '-'
-}: {
-  source: string;
-  destination?: string;
-  separator?: string;
-}) => {
-  let flattenedInput = '';
-  try {
-    const sourceFile = await fsPromises.readFile(source, 'utf8');
-    const parsedString = JSON.parse(sourceFile);
-    flattenedInput = flattenInputToString(parsedString, separator);
-  } catch (err) {
-    console.error(err);
-    return;
-  }
-
-  if (destination !== undefined) {
-    await fsPromises.writeFile(destination, flattenedInput);
-  } else { 
-    console.log(flattenedInput);
-  }
-};
+import {jsonToFlatSass} from './utils';
 
 const cmd = process.argv.slice(2);
+
+if (cmd.length === 0) { 
+  console.log('Usage: json-to-flat-sass <input> <output> [<optional-separator>]')
+  process.exit();
+}
+
 if (cmd.length > 1) {
-  const [source, destination] = cmd;
-  processInput({source, destination});
+  const [source, destination, separator] = cmd;
+  jsonToFlatSass({
+    source,
+    destination,
+    separator,
+  });
 }
