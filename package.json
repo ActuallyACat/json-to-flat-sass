@@ -1,15 +1,21 @@
 {
   "name": "json-to-flat-sass",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Converts JSON to Sass",
   "private": false,
   "main": "dist/index.js",
   "bin": {
     "json-to-flat-sass": "dist/index.js"
   },
+  "files": [
+    "dist"
+  ],
+  "directories": {
+    "dist": "./dist"
+  },
   "scripts": {
     "test": "jest",
-    "build": "tsc --module commonjs && chmod +x dist/index.js",
+    "build": "tsc && chmod +x dist/index.js dist/utils.js",
     "clean": "rimraf dist"
   },
   "author": "",
@@ -17,18 +23,19 @@
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/preset-env": "^7.6.3",
+    "@babel/types": "^7.6.3",
     "@jameslnewell/prettier-config": "^1.0.1",
     "@types/glob": "^7.1.1",
     "@types/jest": "^24.0.21",
     "@types/node": "^12.12.3",
+    "@types/yargs": "^13.0.3",
     "babel-jest": "^24.9.0",
     "glob": "^7.1.5",
     "jest": "^24.9.0",
     "rimraf": "^3.0.0",
     "ts-jest": "^24.1.0",
     "typescript": "^3.6.4",
-    "yargs": "^14.2.0",
-    "@types/yargs": "^13.0.3"
+    "yargs": "^14.2.0"
   },
   "engines": {
     "node": ">=10"
