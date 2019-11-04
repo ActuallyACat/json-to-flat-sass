@@ -1,26 +1,38 @@
-const fsPromises = require('fs').promises; // using experimental API -> https://github.com/nodejs/node/issues/21014
+import * as fs from 'fs';
+import * as path from 'path';
 
+const andThrow = (err: Error) => {
+  console.error(err);
+  throw err;
+}
+
+const andSquash = (err: Error) => {}
+
+// NOTE: fs.promises are experimental API
+// https://github.com/nodejs/node/issues/21014
 export const jsonToFlatSass = async ({
   source,
   destination,
-  separator = '-',
+  separator
 }: {
   source: string;
   destination?: string;
-  separator?: string;
+  separator: string;
 }) => {
   let flattenedInput = '';
   try {
-    const sourceFile = await fsPromises.readFile(source, 'utf8');
+    const sourceFile = await fs.promises.readFile(source, 'utf8').catch(andThrow);
     const parsedString = JSON.parse(sourceFile);
     flattenedInput = flattenInputToString(parsedString, separator);
   } catch (err) {
     console.error(err);
     return;
   }
-
+  
   if (destination !== undefined) {
-    await fsPromises.writeFile(destination, flattenedInput);
+    const { dir } = path.parse(destination);
+    await fs.mkdir(dir, { recursive: true }, andSquash);
+    await fs.promises.writeFile(destination, flattenedInput).catch(andThrow); 
   } else {
     console.log(flattenedInput);
   }
