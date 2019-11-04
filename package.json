@@ -1,7 +1,8 @@
 {
   "name": "json-to-flat-sass",
-  "version": "0.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "Converts JSON to Sass",
+  "private": false,
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -19,9 +20,11 @@
     "jest": "^24.9.0",
     "rimraf": "^3.0.0",
     "ts-jest": "^24.1.0",
-    "typescript": "^3.6.4"
-  },
-  "dependencies": {
+    "typescript": "^3.6.4",
     "babel-jest": "^24.9.0"
-  }
+  },
+  "engines" : { 
+    "node" : ">=10" 
+  },
+  "engineStrict" : true
 }

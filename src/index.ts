@@ -1,4 +1,4 @@
-const fsPromises = require('fs').promises; // https://github.com/nodejs/node/issues/21014
+const fsPromises = require('fs').promises; // using experimental API -> https://github.com/nodejs/node/issues/21014
 import { flattenInputToString } from './utils';
 
 export const processInput = async ({
@@ -12,7 +12,7 @@ export const processInput = async ({
 }) => {
   let flattenedInput = '';
   try {
-    const sourceFile = await fsPromises.readFile(source);
+    const sourceFile = await fsPromises.readFile(source, 'utf8');
     const parsedString = JSON.parse(sourceFile);
     flattenedInput = flattenInputToString(parsedString, separator);
   } catch (err) {
