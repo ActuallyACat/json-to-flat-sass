@@ -23,8 +23,8 @@
     "typescript": "^3.6.4",
     "babel-jest": "^24.9.0"
   },
-  "engines" : { 
-    "node" : ">=10" 
+  "engines": {
+    "node": ">=10"
   },
-  "engineStrict" : true
+  "engineStrict": true
 }
