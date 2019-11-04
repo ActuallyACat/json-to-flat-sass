@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import {jsonToFlatSass} from './utils';
 
 const cmd = process.argv.slice(2);
