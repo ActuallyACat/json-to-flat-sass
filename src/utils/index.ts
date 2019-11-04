@@ -34,7 +34,7 @@ export const flattenInputToString = (
 
   const dive = (input: {[index: string]: any}, name: string): void => {
     if (typeof input !== 'object') {
-      flatMap += `$${name} = '${input}';\n`;
+      flatMap += `$${name}: '${input}';\n`;
       return;
     }
     Object.keys(input).forEach(key => {
