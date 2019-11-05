@@ -1,40 +1,59 @@
+#!/usr/bin/env node
 import * as fs from 'fs';
 import * as path from 'path';
+import { promises } from 'dns';
 
-const andThrow = (err: Error) => {
-  console.error(err);
-  throw err;
+// Inspired by: https://blog.grossman.io/how-to-write-async-await-without-try-catch-blocks-in-javascript/
+export default function to(promise) {
+  return promise
+    .then(data => {
+      return [null, data];
+    })
+    .catch(err => [err]);
 }
 
-const andSquash = (err: Error) => {}
+const readFilePromise = (filename: string) => {
+  return new Promise(function(resolve, reject) {
+    fs.readFile(filename, (err, data) => {
+      if (err) reject(err);
+      resolve(data);
+    });
+  })
+}
 
-// NOTE: fs.promises are experimental API
-// https://github.com/nodejs/node/issues/21014
+const writeFilePromise = (filename: string, content: string) => {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(filename, content, (err) => {
+      if (err) reject(err);
+      resolve();
+    })
+  })
+}
+
 export const jsonToFlatSass = async ({
   source,
   destination,
   separator
 }: {
   source: string;
-  destination?: string;
+  destination: string;
   separator: string;
 }) => {
-  let flattenedInput = '';
-  try {
-    const sourceFile = await fs.promises.readFile(source, 'utf8').catch(andThrow);
-    const parsedString = JSON.parse(sourceFile);
-    flattenedInput = flattenInputToString(parsedString, separator);
-  } catch (err) {
-    console.error(err);
-    return;
+  let flattenedInput = '', err: null | Error, fileData: null;
+
+  [err, fileData] = await to(readFilePromise(source));
+  if (!fileData) { 
+    throw new Error('Error reading source file');
   }
-  
-  if (destination !== undefined) {
-    const { dir } = path.parse(destination);
-    await fs.mkdir(dir, { recursive: true }, andSquash);
-    await fs.promises.writeFile(destination, flattenedInput).catch(andThrow); 
-  } else {
-    console.log(flattenedInput);
+  const parsedString = JSON.parse(fileData);
+  flattenedInput = flattenInputToString(parsedString, separator);
+  const { dir } = path.parse(destination);
+  await fs.mkdir(dir, { recursive: true }, () => { 
+    // an error here means dir is a path. Fine to squash 
+  });
+  [err] = await to(writeFilePromise(destination, flattenedInput));
+  if (err) { 
+    throw new Error ('Error writing to destination file');
   }
 };
 
