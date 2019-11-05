@@ -1,6 +1,6 @@
 {
   "name": "json-to-flat-sass",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Converts JSON to Sass",
   "private": false,
   "main": "dist/index.js",
