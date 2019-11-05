@@ -1,7 +1,6 @@
 const mocks = [
   {
     purple: {
-      alias: 'wisteria',
       '100': '#F0F1F4',
       '200': '#E1E2EA',
       '300': '#C4C5D4',
@@ -12,7 +11,6 @@ const mocks = [
       '800': '#35374A',
     },
     blue: {
-      alias: 'cluny',
       '100': '#E6F0F7',
       '200': '#CCE1F0',
       '300': '#99C3E1',
@@ -20,7 +18,6 @@ const mocks = [
       '500': '#0168B3',
     },
     green: {
-      alias: 'seedling',
       '100': '#E9F6F3',
       '200': '#BCE3DC',
       '300': '#90D1C5',
@@ -29,7 +26,6 @@ const mocks = [
       '600': '#177261',
     },
     yellow: {
-      alias: 'yuzu',
       '100': '#FFFDF4',
       '200': '#FFF5D2',
       '300': '#FFEBA5',
@@ -37,7 +33,6 @@ const mocks = [
       '500': '#FFCE1E',
     },
     red: {
-      alias: 'coral',
       '100': '#FDEDEF',
       '200': '#FBC9CE',
       '300': '#F6949E',
@@ -46,7 +41,6 @@ const mocks = [
       '600': '#A83541',
     },
     orange: {
-      alias: 'peach',
       '100': '#FFF1EE',
       '200': '#FDD6CD',
       '300': '#FDBAAB',
@@ -55,9 +49,9 @@ const mocks = [
     },
   },
   {
-    heading: 'Greycliff CF',
-    paragraph: 'Inter',
-    preformatted: 'IBM Plex Mono',
+    heading: '"Greycliff CF"',
+    paragraph: '"Inter"',
+    preformatted: '"IBM Plex Mono"',
   },
 ];
 
