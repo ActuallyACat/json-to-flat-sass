@@ -26,6 +26,17 @@ var argv = yargs
 var source = argv._[0];
 var destination = argv._[1];
 var extension = argv.extension, separator = argv.separator;
+// just check the common extensions
+var variablePrefix = '$';
+switch (extension) {
+    case 'less':
+        variablePrefix = '@';
+        break;
+    case 'sass':
+    case 'scss':
+    default:
+        variablePrefix = '$';
+}
 if (argv._.length < 2) {
     console.log('Error - Source path or destination missing\n');
     yargs.showHelp();
@@ -45,6 +56,7 @@ sourceDirectoryList.forEach(function (currentPath) {
             source: currentPath,
             destination: path.resolve(destinationDirectory, name) + "." + extension,
             separator: separator,
+            variablePrefix: variablePrefix
         });
     }
     catch (err) {

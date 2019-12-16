@@ -22,6 +22,19 @@ const argv = yargs
 const source = argv._[0];
 const destination = argv._[1];
 const {extension, separator} = argv;
+
+// just check the common extensions
+let variablePrefix: '$' | '@' = '$';
+switch (extension) {
+  case 'less':
+    variablePrefix = '@';
+    break;
+  case 'sass':
+  case 'scss':
+  default:
+    variablePrefix = '$';
+}
+
 if (argv._.length < 2) {
   console.log('Error - Source path or destination missing\n');
   yargs.showHelp();
@@ -43,7 +56,8 @@ sourceDirectoryList.forEach(currentPath => {
     jsonToFlatSass({
       source: currentPath,
       destination: `${path.resolve(destinationDirectory, name)}.${extension}`,
-      separator,
+      separator, 
+      variablePrefix
     });
   } catch (err) {
     console.error(err);
