@@ -1,6 +1,6 @@
 {
   "name": "json-to-flat-sass",
-  "version": "0.0.14",
+  "version": "1.0.0",
   "description": "Converts JSON to Sass",
   "private": false,
   "main": "dist/index.js",
@@ -40,5 +40,8 @@
   "engines": {
     "node": ">=10"
   },
-  "engineStrict": true
+  "engineStrict": true,
+  "dependencies": {
+    "lodash": "^4.17.15"
+  }
 }

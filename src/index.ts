@@ -8,20 +8,20 @@ const version = require('../package.json').version;
 
 const argv = yargs
   .usage(
-    'Usage: json-to-flat-sass <source> <destination> [--separator <separator> --extension <extension> ...]',
+    'Usage: json-to-flat-sass <source> <destination> [--caseType <caseType> --extension <extension> ...]',
   )
   .help('help')
   .alias('help', 'h')
   .version('version', version)
   .alias('version', 'v')
   .options({
-    separator: {type: 'string', default: '-'},
+    caseType: {type: 'string', default: 'snake'},
     extension: {type: 'string', default: 'scss'},
   }).argv;
 
 const source = argv._[0];
 const destination = argv._[1];
-const {extension, separator} = argv;
+const {extension, caseType} = argv;
 
 // just check the common extensions
 let variablePrefix: '$' | '@' = '$';
@@ -56,7 +56,7 @@ sourceDirectoryList.forEach(currentPath => {
     jsonToFlatSass({
       source: currentPath,
       destination: `${path.resolve(destinationDirectory, name)}.${extension}`,
-      separator, 
+      caseType, 
       variablePrefix
     });
   } catch (err) {

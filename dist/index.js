@@ -14,18 +14,18 @@ var utils_1 = require("./utils");
 var path = __importStar(require("path"));
 var version = require('../package.json').version;
 var argv = yargs
-    .usage('Usage: json-to-flat-sass <source> <destination> [--separator <separator> --extension <extension> ...]')
+    .usage('Usage: json-to-flat-sass <source> <destination> [--caseType <caseType> --extension <extension> ...]')
     .help('help')
     .alias('help', 'h')
     .version('version', version)
     .alias('version', 'v')
     .options({
-    separator: { type: 'string', default: '-' },
+    caseType: { type: 'string', default: 'snake' },
     extension: { type: 'string', default: 'scss' },
 }).argv;
 var source = argv._[0];
 var destination = argv._[1];
-var extension = argv.extension, separator = argv.separator;
+var extension = argv.extension, caseType = argv.caseType;
 // just check the common extensions
 var variablePrefix = '$';
 switch (extension) {
@@ -55,7 +55,7 @@ sourceDirectoryList.forEach(function (currentPath) {
         utils_1.jsonToFlatSass({
             source: currentPath,
             destination: path.resolve(destinationDirectory, name) + "." + extension,
-            separator: separator,
+            caseType: caseType,
             variablePrefix: variablePrefix
         });
     }
